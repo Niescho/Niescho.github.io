@@ -1,0 +1,209 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>機器學習入門 | Lintao‘s Libaray</title><meta name="keywords" content="基於tensorflow"><meta name="author" content="Lin tao"><meta name="copyright" content="Lin tao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="什麼是機器學習？對一般的程式來講，我們將規則(Rule)和數據(Data)輸入進電腦中，程式會計算出新的數據。![](&#x2F;Users&#x2F;liulintao&#x2F;Desktop&#x2F;截屏2022-01-21 下午5.57.04.png) 而對於機器學習，我們將數據(Data)和結果(Answer)輸入進電腦中，程式會推測出這個“遊戲”的規則(Rele)是什麼（當然結果不會是百分百準確）。 ![](&#x2F;Users&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="機器學習入門">
+<meta property="og:url" content="https://niescho.github.io/2022/01/21/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E5%85%A5%E9%96%80/index.html">
+<meta property="og:site_name" content="Lintao‘s Libaray">
+<meta property="og:description" content="什麼是機器學習？對一般的程式來講，我們將規則(Rule)和數據(Data)輸入進電腦中，程式會計算出新的數據。![](&#x2F;Users&#x2F;liulintao&#x2F;Desktop&#x2F;截屏2022-01-21 下午5.57.04.png) 而對於機器學習，我們將數據(Data)和結果(Answer)輸入進電腦中，程式會推測出這個“遊戲”的規則(Rele)是什麼（當然結果不會是百分百準確）。 ![](&#x2F;Users&#x2F;">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://niescho.github.io/img/tensorflow.jpeg">
+<meta property="article:published_time" content="2022-01-21T09:01:01.000Z">
+<meta property="article:modified_time" content="2022-01-21T11:01:19.538Z">
+<meta property="article:author" content="Lin tao">
+<meta property="article:tag" content="基於tensorflow">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://niescho.github.io/img/tensorflow.jpeg"><link rel="shortcut icon" href="/img/Kitty%201.ico"><link rel="canonical" href="https://niescho.github.io/2022/01/21/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E5%85%A5%E9%96%80/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '複製成功',
+    error: '複製錯誤',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '機器學習入門',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-01-21 19:01:19'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">載入中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/IMG_1409.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">標籤</div><div class="length-num">1</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 關於</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/tensorflow.jpeg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Lintao‘s Libaray</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 關於</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">機器學習入門</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2022-01-21T09:01:01.000Z" title="發表於 2022-01-21 17:01:01">2022-01-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2022-01-21T11:01:19.538Z" title="更新於 2022-01-21 19:01:19">2022-01-21</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字數總計:</span><span class="word-count">958</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">閱讀時長:</span><span>3分鐘</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="機器學習入門"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">閱讀量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h4 id="什麼是機器學習？"><a href="#什麼是機器學習？" class="headerlink" title="什麼是機器學習？"></a>什麼是機器學習？</h4><p>對一般的程式來講，我們將規則(Rule)和數據(Data)輸入進電腦中，程式會計算出新的數據。![](/Users/liulintao/Desktop/截屏2022-01-21 下午5.57.04.png)</p>
+<p>而對於機器學習，我們將數據(Data)和結果(Answer)輸入進電腦中，程式會推測出這個“遊戲”的規則(Rele)是什麼（當然結果不會是百分百準確）。 ![](/Users/liulintao/Desktop/截屏2022-01-21 下午5.56.33.png)</p>
+<p>之後我們便可以輸入數據(Data)並給出預測(Prediction)</p>
+<p>![](/Users/liulintao/Desktop/截屏2022-01-21 下午5.56.56.png)</p>
+<h4 id="什麼是TensorFlow？"><a href="#什麼是TensorFlow？" class="headerlink" title="什麼是TensorFlow？"></a>什麼是TensorFlow？</h4><p>（Wiki）<strong>TensorFlow</strong> is a <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Free_and_open-source_software">free and open-source</a> <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Library_(computing)">software library</a> for <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Machine_learning">machine learning</a> and <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Artificial_intelligence">artificial intelligence</a>. It can be used across a range of tasks but has a particular focus on <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Types_of_artificial_neural_networks#Training">training</a> and <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Statistical_inference">inference</a> of <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Deep_neural_networks">deep neural networks</a>.</p>
+<p><strong>TensorFlow</strong>是一個開源機器學習平台，developed by <strong>Google</strong>，是目前最受歡迎的平台之一。你可以稱他為“<strong>張量流</strong>”。為什麼稱為張量？在接下來的過程中你將會逐漸看到。</p>
+<h4 id="一個簡單的例子"><a href="#一個簡單的例子" class="headerlink" title="一個簡單的例子"></a>一個簡單的例子</h4><p>下面我有一張表，你能看出它們之間有什麼關係嗎？</p>
+<table>
+<thead>
+<tr>
+<th>X</th>
+<th>-1</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Y</strong></td>
+<td><strong>-3</strong></td>
+<td><strong>-1</strong></td>
+<td><strong>1</strong></td>
+<td><strong>3</strong></td>
+<td><strong>5</strong></td>
+<td><strong>7</strong></td>
+</tr>
+</tbody></table>
+<p>沒錯是$Y =2X-1$，這種找規律的題目我們小學時便已熟知了，但是交給計算機，計算機怎麼去辨別他們之間有什麼關係呢？</p>
+<p>下面我們給出如下程序：</p>
+<p>第一步，導入模組tensorflow和numpy，習慣簡稱為tf和np。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure>
+
+<p>第二步，利用<strong>tf.keras.Sequential</strong>，<strong>kears</strong> is a high-level <strong>API</strong> to <strong>build and train models</strong> in TensorFlow. <strong>Sequential</strong> model is appropriate for <strong>a plain stack of layers</strong> where each layer has <strong>exactly one input tensor and one output tensor</strong>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># keras單層神經網絡,units代表神經元個數，其值為1，input_shape代表輸入形狀</span></span><br><span class="line">model = tf.keras.Sequential([tf.keras.layers.Dense(units=<span class="number">1</span>, input_shape=[<span class="number">1</span>])])</span><br><span class="line"><span class="comment"># 損失函數loss和優化函數optimizer</span></span><br><span class="line">model.<span class="built_in">compile</span>(optimizer=<span class="string">&#x27;sgd&#x27;</span>, loss=<span class="string">&#x27;mean_squared_error&#x27;</span>)</span><br><span class="line"><span class="comment">#優化器參數sgd代表隨機梯度下降法，損失器參數mean_squared_error代表均方誤差</span></span><br></pre></td></tr></table></figure>
+
+<p>当計算機嘗試獲取這些內容时，神經網絡模型会進行猜測，例如是 Y=2X+1。<code>loss</code> 函數將猜測答案与已知正確答案進行對比，並衡量結果的好坏。</p>
+<p>接下来，模型使用 <code>optimizer</code> 函數進行另一个猜測。它会根據損失函數的結果，最大限度地減少損失。此时，可能会得到 Y=3X-5 之類的內容。虽然这样仍有些糟糕，但更接近正確的結果（損失更低）。</p>
+<p>第三步，numpy將創建兩個ndarry對象，來存儲x和y的值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xs = np.array([-<span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>, <span class="number">4.0</span>], dtype=<span class="built_in">float</span>)</span><br><span class="line">ys = np.array([-<span class="number">3.0</span>, -<span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">3.0</span>, <span class="number">5.0</span>, <span class="number">7.0</span>], dtype=<span class="built_in">float</span>)</span><br></pre></td></tr></table></figure>
+
+<p>第四步，訓練神經網絡。训练神经网络的过程是在 <code>model.fit</code> 调用中的，神经网络从其中了解 X 和 Y 之间的关系。在这种情况下，它会在进行猜测、衡量好坏（损失），或通过优化器做出另一个猜测之前遍历整个循环。它会按照您指定的周期数运行。运行该代码时，您会看到每个周期输出的损失。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#訓練神經網絡，epochs代表循環次數</span></span><br><span class="line">model.fit(xs, ys, epochs=<span class="number">500</span>)</span><br></pre></td></tr></table></figure>
+
+<p>![](/Users/liulintao/Desktop/截屏2022-01-21 下午6.50.07.png)</p>
+<p>![](/Users/liulintao/Desktop/截屏2022-01-21 下午6.50.25.png)</p>
+<p>可以看到隨著循環的進行，loss逐漸變小為一個十分小的數，可見是一個非常可靠的模型了。</p>
+<p>第五步，使用模型。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(model.predict([<span class="number">10.0</span>]))</span><br></pre></td></tr></table></figure>
+
+<p>我們得到結果為<code>18.975574</code>,如果我們再多輸入幾個數據呢？</p>
+<p>我們將數增至15.0，其輸出結果為<code>19.001694</code>，應該來說，隨著數據量的增大，其預測將會越來越準確。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Lin tao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章連結: </span><span class="post-copyright-info"><a href="https://niescho.github.io/2022/01/21/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E5%85%A5%E9%96%80/">https://niescho.github.io/2022/01/21/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E5%85%A5%E9%96%80/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 許可協議。轉載請註明來自 <a href="https://niescho.github.io" target="_blank">Lintao‘s Libaray</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%9F%BA%E6%96%BCtensorflow/">基於tensorflow</a></div><div class="post_share"><div class="social-share" data-image="/img/tensorflow.jpeg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/01/19/hello-world/"><img class="next-cover" src="/img/post1.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Hello,This is my blog!</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/IMG_1409.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Lin tao</div><div class="author-info__description">事出乎沉思 義歸乎翰藻</div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">標籤</div><div class="length-num">1</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分類</div><div class="length-num">0</div></a></div></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Niescho" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:lintao.liu39@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://twitter.com/liulintao2" target="_blank" title="twitter"><i class="fab fa-twitter"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">什麼是機器學習？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AFTensorFlow%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">什麼是TensorFlow？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E5%80%8B%E7%B0%A1%E5%96%AE%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="toc-number">3.</span> <span class="toc-text">一個簡單的例子</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/01/21/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E5%85%A5%E9%96%80/" title="機器學習入門"><img src="/img/tensorflow.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="機器學習入門"/></a><div class="content"><a class="title" href="/2022/01/21/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E5%85%A5%E9%96%80/" title="機器學習入門">機器學習入門</a><time datetime="2022-01-21T09:01:01.000Z" title="發表於 2022-01-21 17:01:01">2022-01-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/01/19/hello-world/" title="Hello,This is my blog!"><img src="/img/post1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello,This is my blog!"/></a><div class="content"><a class="title" href="/2022/01/19/hello-world/" title="Hello,This is my blog!">Hello,This is my blog!</a><time datetime="2022-01-19T12:35:48.878Z" title="發表於 2022-01-19 20:35:48">2022-01-19</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/tensorflow.jpeg')"><div id="footer-wrap"><div class="copyright">&copy;2022 By Lin tao</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">事出乎沉思 義歸乎翰藻</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到頂部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><canvas class="fireworks" mobile="ture"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="ture" data-click="ture"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
